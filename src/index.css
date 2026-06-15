@@ -54,7 +54,7 @@ body {
   margin: 0;
 }
 
-#root {
+:root {
   width: 1126px;
   max-width: 100%;
   margin: 0 auto;
@@ -131,10 +131,14 @@ li.pokemon-item{
 }
 ul{
     display: flex;
-    gap: 20px;
+    align-content: center;
+    text-align: center;
+    column-gap: 20px;
     flex-direction: row;
     flex-wrap: wrap;
     text-decoration: none;
+    min-height: 928px;
+    justify-content: center;
 }
 
 
