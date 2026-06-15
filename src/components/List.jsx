@@ -1,9 +1,10 @@
 import Item from "./Item";
 function List({list}){
-  return( 
+  return(
+
     <ul>
       {list.map(function(item){
-        return <Item key={item.objectID} item={item}/>
+        return <Item key={item.id} item={item}/>
       })}
     </ul>
   );

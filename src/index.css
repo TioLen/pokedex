@@ -109,3 +109,38 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+.pokemon-item {
+display: flex;
+align-items: center;
+margin-bottom: 10px;
+border: 1px solid #eee;
+padding: 10px;
+border-radius: 5px;
+}
+
+li.pokemon-item{
+    align-items: start;
+    margin-bottom: 10px;
+    border: 1px solid #eee;
+    padding: 10px;
+    border-radius: 5px;
+    border-bottom-width: medium;
+    text-decoration: none;
+    width: 35%; 
+}
+ul{
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-decoration: none;
+}
+
+
+.pokemon-item img {
+margin-right: 10px;
+}
+.pokemon-item span {
+font-size: 1.1em;
+}

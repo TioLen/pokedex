@@ -1,12 +1,17 @@
 function Item({ item }) {
   return (
-    <li key={item.objectID}>
+    <li key={item.id} className="pokemon-item">
+      <img src={item.imageUrl} alt={item.name}
+      style={{width: '96px', height: '96px'}} />
+
       <span>
-        <a href={item.url}>{item.title}<br /></a>
+        <a href={item.url}>
+          {item.name}
+        </a>
       </span>
-      <span>{item.author}<br /></span>
-      <span>{item.num_comments}<br /></span>
-      <span>{item.points}<br /></span>
+      <span>ID: {item.id}</span>
+    <br/>
+
     </li>
   );
 }

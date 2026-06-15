@@ -5,7 +5,7 @@ import Search from './components/Search';
 import useSemiPersistentState from './hooks/useSemiPersistentState';
 
 import styles from './App.module.css'; // Importe o CSS Module
-import './index.css'
+import './index.css';
 
 
 // Action para simular a adição de uma story no banco de dados
@@ -18,7 +18,6 @@ async function addStoryAction(prevState, formData) {
 
   await new Promise(resolve => setTimeout(resolve, 1000));
 
-
   if (!title || !author) {
     return { success: false, message: 'Título e autor são obrigatórios!' };
   }
@@ -26,9 +25,6 @@ async function addStoryAction(prevState, formData) {
 }
 
 function App() {
-  const [searchTerm, setSearchTerm] = useSemiPersistentState(
-    'searchTerm' || ''
-  );
 
   const [stories, setStories] = useState([]);          // estados das stories
   const [isLoading, setIsLoading] = useState(false);  // estado de carregamento
@@ -36,21 +32,12 @@ function App() {
 
   const [submissionState, submissionStoryAction] = useActionState(addStoryAction, null);
 
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
-  // salva o termo de pesquisa no cache do navegador
-  useEffect(() => {
-    localStorage.setItem('searchTerm', searchTerm);
-  }, [searchTerm]);
-
   // efeito para buscar dados da API
   useEffect(() => {
     setIsLoading(true); // carregando = true
     setIsError(false); // diz que por agora não há erro
 
-    fetch(`https://pokeapi.co/api/v2/pokemon?limit=20&offset=0`)
+    fetch(`https://pokeapi.co/api/v2/pokemon?limit=40&offset=0`)
       .then(response => response.json())
       .then(async result => {
         const pokemonList = result.results.map(pokemon => {
@@ -58,8 +45,7 @@ function App() {
           return {
             id: id,
             name: pokemon.name,
-            imageUrl: `https://raw.githubusercontent.com/PokeAPI/
-      sprites/master/sprites/pokemon/${id}.png`,
+            imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
             url: pokemon.url
           };
         });
@@ -72,12 +58,12 @@ function App() {
         setIsError(true);   // define o estado de erro
         setIsLoading(false); // finaliza o carregamento
       })
-  }, [searchTerm])
+  },[])
 
   // Com verificação de erro
   const filteredList = stories.filter(function (item) {
-    const title = (item && (item.title || item.story_title) || '').toLowerCase();
-    return title.includes(searchTerm.toLowerCase());
+    const name = (item && item.name || '').toLowerCase();
+    return name.includes(item.name);
   }
   );
 
@@ -85,9 +71,6 @@ function App() {
   return (
     <div className={styles.container}>
       <h1 className={styles.header}>Minhas Histórias Hacker</h1>
-      <Search onSearch={handleChange} searchTerm={searchTerm} />
-
-      <p>Mostrando resultados para "{searchTerm}"</p>
 
       <hr />
 
