@@ -22,7 +22,7 @@ async function addStoryAction(prevState, formData) {
 }
 
 function App() {
-  const [stories, setStories] = useState([]);          // estados das stories
+  const [pokemons, setPokemons] = useState([]);          // estados dos pokemons
   const [isLoading, setIsLoading] = useState(false);  // estado de carregamento
   const [isError, setIsError] = useState(false);      // estado de erro
 
@@ -48,7 +48,7 @@ function App() {
             url: pokemon.url
           };
         } );
-        setStories(pokemonList);
+        setPokemons(pokemonList);
         setIsLoading(false);
       })
       .catch(() => { // caso haja algum erro:
@@ -58,7 +58,7 @@ function App() {
   }, []); // Array de dependências vazio para que o efeito seja executado apenas uma vez (ao montar o componente)
 
   // A lista filtrada agora será a lista completa de Pokémons, já que não há searchTerm para filtrar
-  const displayedPokemons = stories;
+  const displayedPokemons = pokemons;
 
   // renderizar elementos na tela
   return (
