@@ -1,32 +1,14 @@
 import React, { useState, useEffect, useActionState } from 'react';
 import Item from './components/Item';
 import List from './components/List';
-import Search from './components/Search'; // Manter o import caso o componente Search seja usado para outras finalidades, mas não para filtrar a lista principal de Pokémons.
 
 import styles from './App.module.css'; // Importe o CSS Module
 import './index.css';
-
-// Action para simular a adição de uma story no banco de dados (mantido como estava)
-async function addStoryAction(prevState, formData) {
-  const title = formData.get('title');
-  const author = formData.get('author');
-
-  console.log("Simulando adição de story: ", { title, author });
-
-  await new Promise(resolve => setTimeout(resolve, 1000));
-
-  if (!title || !author) {
-    return { success: false, message: 'Título e autor são obrigatórios!' };
-  }
-  return { success: true, message: `Story '${title}' adicionada com sucesso!` };
-}
 
 function App() {
   const [pokemons, setPokemons] = useState([]);          // estados dos pokemons
   const [isLoading, setIsLoading] = useState(false);  // estado de carregamento
   const [isError, setIsError] = useState(false);      // estado de erro
-
-  const [submissionState, submissionStoryAction] = useActionState(addStoryAction, null);
 
   // Efeito para buscar dados da API da PokéAPI
   useEffect(() => {
