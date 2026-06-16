@@ -22,9 +22,12 @@ function App() {
       .then(async result => {
         const pokemonList = result.results.map(pokemon => {
           const id = pokemon.url.split('/').slice(-2, -1)[0];
+          
+          // Torna a primeira letra maiúscula
+          const capitalizedName = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
           return {
             id: id,
-            name: pokemon.name,
+            name: capitalizedName,
             // imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
             imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/showdown/${id}.gif`,
             url: pokemon.url
